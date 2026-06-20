@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+#timestamp {
+    display: inline-block;
+
+    background: rgba(60, 60, 60, 0.85);
+
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.1;
+
+    padding: 30px 50px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0px 8px 20px rgba(30,30,30,0.8);
+
+    text-shadow:
+        2px 2px 4px rgba(0,0,0,0.8);
+}
+
+#date,
+#time {
+    font-size: 120px;
+    letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="timestamp">
+    <div id="date"></div>
+    <div id="time"></div>
+</div>
+
+<script>
+function updateTime() {
+    const now = new Date();
+
+    document.getElementById('date').textContent =
+        now.toLocaleDateString('de-DE', {
+            timeZone: 'Europe/Berlin'
+        });
+
+    document.getElementById('time').textContent =
+        now.toLocaleTimeString('de-DE', {
+            timeZone: 'Europe/Berlin',
+            hour12: false
+        });
+}
+
+updateTime();
+setInterval(updateTime, 1000);
+</script>
+
+</body>
+</html>
