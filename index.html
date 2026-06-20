@@ -14,24 +14,16 @@ body {
 
 #timestamp {
     display: inline-block;
-
     background: rgba(60, 60, 60, 0.85);
-
-    color: #ff8c00;
+    color: #FFA500;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
     line-height: 1.1;
-
     padding: 30px 50px;
-
     border-radius: 20px;
-
-    box-shadow:
-        0px 8px 20px rgba(30,30,30,0.8);
-
-    text-shadow:
-        2px 2px 4px rgba(0,0,0,0.8);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
 #date,
@@ -53,16 +45,22 @@ body {
 function updateTime() {
     const now = new Date();
 
-    document.getElementById('date').textContent =
-        now.toLocaleDateString('de-DE', {
-            timeZone: 'Europe/Berlin'
-        });
+    const berlinDate = new Date(
+        now.toLocaleString('en-US', { timeZone: 'Europe/Berlin' })
+    );
 
-    document.getElementById('time').textContent =
-        now.toLocaleTimeString('de-DE', {
-            timeZone: 'Europe/Berlin',
-            hour12: false
-        });
+    const day = String(berlinDate.getDate()).padStart(2, '0');
+    const month = String(berlinDate.getMonth() + 1).padStart(2, '0');
+    const year = berlinDate.getFullYear();
+
+    const date = `${day}.${month}.${year}`;
+
+    const time = berlinDate.toLocaleTimeString('de-DE', {
+        hour12: false
+    });
+
+    document.getElementById('date').textContent = date;
+    document.getElementById('time').textContent = time;
 }
 
 updateTime();
